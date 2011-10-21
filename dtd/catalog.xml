@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE catalog PUBLIC "-//OASIS//DTD XML Catalogs V1.1//EN" "dtd/catalog.dtd">
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+	
+	<group prefer="system">
+		<system systemId="http://www.dbnl.org/xml/dtd/teixlite.dtd" 
+			uri="teixlite.dtd"/>
+	</group>
+	
+</catalog>

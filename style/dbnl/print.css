@@ -1,0 +1,48 @@
+html, body, #wrapper, #dbnl, #scrollable, table#content, td#text, td#left
+{
+	margin-left:0px !important;
+	width:100% !important;
+	overflow:visible !important;
+}
+#wrapper, #scrollable
+{
+	position:relative;
+	height:auto;
+	left:0 ;
+	top:0 !important;
+}
+div#nav, div#navwrapper, div#broodwrapper, td#left div, div#breadcrumbs
+{
+	display:none !important;
+	height:0px;
+}	
+
+td#left
+{
+	width:0px !important;
+}
+
+td#text,
+div.contentholder
+{
+	width:450px !important !important;
+}
+td#right div.notes-container
+td#right,
+{
+	width:200px !important;
+}
+div#dbnl
+{
+	width: 100% !important; 
+	margin: 0 !important; 
+	float: none !important;
+}
+
+table.filler
+{
+	display:none !important;
+}
+
+div.nieuwe_titels_left, div.nieuwe_titels_right { width:180px; }
+div.nieuwe_titels_mid { width:310px; }

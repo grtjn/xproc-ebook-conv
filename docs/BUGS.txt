@@ -1,0 +1,10 @@
+
+Bugs, and known issues:
+- The xhtml is written with indentation when debug is activated, but that gives some funky results in page ref layout in for instance the index.
+- No elegant error handling when specifying non-existing files for input, styles or template.
+- Inline footnotes aren't optimally handled yet. Blockquotes inside footnotes result in invalid XHTML (though epub viewers most likely won't complain)
+
+Future wishes:
+- Outputting of PDF.
+- Composing of parts and sections based on input fragments (e.g. high granular input control from template).
+- Footnotes as sidebars or gathered at bottom of page (as far as possible in epub)

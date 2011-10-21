@@ -1,0 +1,27 @@
+<!-- DBNL special characters for HTML -->
+
+<!-- Character entity set. Typical invocation:
+     <!ENTITY % DBNLsymbol PUBLIC
+       "-//DBNL//ENTITIES Special//EN//HTML">
+     %DBNLspecial; -->
+
+<!ENTITY unicode  "[unicode]"><!-- Unicode note -->
+<!ENTITY schwa    "[schwa ]"><!-- Schwa -->
+<!ENTITY aolduml  "[aolduml]"><!-- a Old Umlaut -->
+<!ENTITY eolduml  "[eolduml]"><!-- e Old Umlaut -->
+<!ENTITY oolduml  "[oolduml]"><!-- o Old Umlaut -->
+<!ENTITY uolduml  "[uolduml]"><!-- u Old Umlaut -->
+<!ENTITY Aolduml  "[Aolduml]"><!-- A Old Umlaut -->
+<!ENTITY Eolduml  "[Eolduml]"><!-- E Old Umlaut -->
+<!ENTITY Oolduml  "[Oolduml]"><!-- O Old Umlaut -->
+<!ENTITY Uolduml  "[Uolduml]"><!-- U Old Umlaut -->
+
+<!-- HHV: Vertaal &Unnnn entities naar XML entities -->
+
+<!ENTITY U0111            "&#x00111;">
+<!ENTITY U0113            "&#x00113;">
+<!ENTITY U0119            "&#x00119;">
+<!ENTITY U014B            "&#x0014B;">
+<!ENTITY U014F            "&#x0014F;">
+<!ENTITY U016B            "&#x0016B;">
+<!ENTITY U016F            "&#x0016F;">

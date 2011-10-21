@@ -1,0 +1,37 @@
+<eb:ebook xmlns:eb="http://grtjn.nl/ns/xproc/ebook">
+	<eb:metadata
+		xmlns:dc="http://purl.org/dc/elements/1.1/"
+		xmlns:dcterms="http://purl.org/dc/terms/"
+		xmlns:opf="http://www.idpf.org/2007/opf"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	>
+		<!-- contents: (dc:*|meta|get-metadata)* -->
+		
+		<eb:get-metadata />
+		
+		<!-- Required: -->
+		<dc:language xsi:type="dcterms:RFC3066">en</dc:language>
+		
+	</eb:metadata>
+	<eb:body>
+		<eb:front>
+			<!-- contents: (get-front-matter|index|list-of-illustrations|list-of-tables|table-of-contents)* -->
+			
+			<eb:get-front-matter />
+			
+		</eb:front>
+		<eb:main>
+			<!-- contents: (get-main-matter|notes-page)* -->
+			
+			<eb:get-main-matter />
+			<eb:notes-page label="Notes"/>
+			
+		</eb:main>
+		<eb:back>
+			<!-- contents: (get-back-matter|index|list-of-illustrations|list-of-tables|notes-page|table-of-contents)* -->
+			
+			<eb:get-back-matter />
+			
+		</eb:back>
+	</eb:body>
+</eb:ebook>

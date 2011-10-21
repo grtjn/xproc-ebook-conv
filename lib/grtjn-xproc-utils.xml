@@ -1,0 +1,8 @@
+<xproc-config xmlns="http://xmlcalabash.com/ns/configuration"
+	      xmlns:p="http://www.w3.org/ns/xproc"
+	      xmlns:ut="http://grtjn.nl/ns/xproc/util">
+
+<implementation type="ut:sys-info"
+		class-name="nl.grtjn.xproc.util.osutils.SysInfo"/>
+		
+</xproc-config>

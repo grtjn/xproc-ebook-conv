@@ -1,0 +1,68 @@
+
+The XProc E-Book Processor is an end-user application. The distribution therefore includes all necessary dependencies, apart from Java Run-Time.
+
+Requirements
+------------
+- Java Run-Time 1.5 or higher
+
+Included (Java) packages
+------------------------
+Located under 'lib' folder:
+- XMLCalabash 0.9.35
+	- Saxon-HE 9.3.0.4J (required by XMLCalabash)
+	- Apache Commons Codes 1.3 (required by XMLCalabash)
+	- Apache Commons Httpclient 3.1 (required by XMLCalabash)
+	- Apache Commons IO 1.3.1 (required by XMLCalabash)
+	- Apache Commons Logging 1.1.1 (required by XMLCalabash)
+- Epubcheck 1.2 (for ePub validation)
+	- Saxon 6.5.5 (required by Epubcheck)
+	- Jing version 20091111 (required by Epubcheck)
+- Apache XML Commons Resolver 1.2 (for local DTD resolving)
+
+Also included is an XProc extension package:
+- grtjn-xproc-utils (for the extension step ut:sys-info, source available under 'src' folder)
+
+Installation
+------------
+- Unpack the distribution package to a suitable location.
+- Make sure 'java' is available from the command-line (by adding it to the PATH environment variable)
+- Open a command-box in the root of where you unpacked the E-Book Processor
+- Run the following command-line:
+
+	java -cp .;lib\resolver.jar;lib\calabash-0.9.35.jar;lib\grtjn-xproc-utils.jar -Dcom.xmlcalabash.phonehome=false -Djava.util.logging.config.file=logging.properties com.xmlcalabash.drivers.Main -D -E org.apache.xml.resolver.tools.CatalogResolver -U org.apache.xml.resolver.tools.CatalogResolver -c lib/grtjn-xproc-utils.xml -i source=in/mult001mill01_01.xml src\nl\grtjn\xproc\ebook\main.xpl
+
+- This should produce an epub file of the example file 'Millioenenstudien' by 'Multatuli'. It should be written as 'out/mult001mill01_01-default.epub'.
+- Windows/DOS users can also use the 'run.bat' file. To do the same as above, call it as follows:
+
+	run.bat in/mult001mill01_01.xml
+	
+- Call run.bat without parameters for further usage.
+
+DTD references to internet
+--------------------------
+- If internet access goes through a Proxy server, you may need to add the following parameters to the command-line, just after 'java'. Make sure to replace '...' with suitable values. User and Password can be left out if not applicable:
+
+	-Dhttp.proxyHost=... -Dhttp.proxyPort=... -Dhttp.proxyUser=... -Dhttp.proxyPassword...
+
+- Internet access is usually necessary to access DTDs that are referenced from DOCTYPEs using HTTP references.
+- You could also put the dtd with all its modules in the 'dtd' folder, and add an entry to the 'catalog.xml' file in the same directory.
+	
+Other resources
+---------------
+- docs/
+	- Contains the documentations, including: this file, notices, license, buglist, and a readme.
+- etc/
+	- Contains anything related to styling and templating. The application comes with three styles: 'default', 'dbnl', and 'medieval'.
+- in/
+	- Contains a TEI 2 encoded XML file containing the booklet 'Millioenenstudien' by 'Multatuli'. It was the XProc challenge example file
+- log/
+	- A 'run.log' file will be written to this folder on each run. See 'logging.properties' for details.
+	- Debug files will be written to this folder as well if debug is activated by passing in 'debug=true' at the end of the command-line
+- src/
+	- Contains all XProc, XSLT, and Java logic used in this application.
+- tmp/
+	- Is used to build up the contents of each epub file, and will be cleared on each run.
+
+Already mentioned:
+- The 'dtd' folder, containing TEI dtd, and appropriate catalog
+- The 'lib' folder, containing all necessary (Java) packages to run the application

@@ -1,0 +1,35 @@
+
+* {
+	font-family: Verdana, Arial, sans-serif;
+}
+
+body, .body, .footer {
+	background-color: white;
+}
+
+.pb {
+	width: 100%;
+	text-align: center;
+	padding: 1em;
+}
+
+p.indent {
+	text-indent: 1em;
+}
+
+th {
+	font-weight: normal;
+}
+td, th {
+	text-align: left;
+}
+
+i {
+	font-weight: bold;
+}
+
+.notenr { 
+    font-size: 80%;
+    vertical-align: super;
+	padding-right: 0.3em;
+} 

@@ -1,0 +1,118 @@
+<styles>
+	<!-- generic style applies always -->
+	<generic-style>
+		<output method="epub">
+			<files>
+				<file href="generic/epub.css"/>
+			</files>
+			<head xmlns="http://www.w3.org/1999/xhtml">
+				<link rel="stylesheet" href="generic/epub.css" type="text/css" />
+			</head>
+		</output>
+	</generic-style>
+	
+	<style name="dbnl">
+		<output method="epub">
+			<files>
+				<file href="dbnl/main.css"/>
+				<file href="dbnl/nav.css"/>
+				<file href="dbnl/ie7.css"/>
+				<file href="dbnl/tabs.css"/>
+				<file href="dbnl/ie6.css"/>
+				<file href="dbnl/tekst.css"/>
+				<file href="dbnl/orga.css"/>
+				<file href="dbnl/normaal.css"/>
+				<file href="dbnl/lightbox.css"/>
+				<file href="dbnl/print.css"/>
+				<file href="dbnl/groot.css"/>
+				<!--file href="dbnl/klein.css"/-->
+			</files>
+			<head xmlns="http://www.w3.org/1999/xhtml">
+				<!--<![CDATA[[if !(IE 6)]> <link rel="stylesheet" href="dbnl/main.css" media="screen" type="text/css"/> <![endif]]]>-->
+				<!--<![CDATA[[if !(IE 6)]> <link rel="stylesheet" href="dbnl/nav.css" type="text/css"/> <![endif]]]>-->
+				<!--<![CDATA[[if IE 7]>
+					<link rel="stylesheet" href="dbnl/ie7.css" type="text/css"> 
+				<![endif]]]>-->
+				<link rel="stylesheet" href="dbnl/tabs.css" type="text/css"/>
+				<!--<![CDATA[[if IE 6]> <link href="dbnl/ie6.css" rel="stylesheet" type="text/css"/> <![endif]]]>-->
+				<link rel="stylesheet" href="dbnl/tekst.css" type="text/css"/>
+				<link rel="stylesheet" href="dbnl/orga.css" type="text/css"/>
+				<link rel="stylesheet" href="dbnl/normaal.css" type="text/css"/>
+				<link rel="stylesheet" href="dbnl/lightbox.css" type="text/css" media="screen"/>
+				<link rel="stylesheet" href="dbnl/print.css" type="text/css" media="print"/>
+				<link rel="alternate stylesheet" title="groot" href="dbnl/groot.css" type="text/css"/>
+				<link rel="alternate stylesheet" title="normaal" href="dbnl/normaal.css" type="text/css"/>
+				<!--<![CDATA[	<link rel="alternate stylesheet" title="klein" href="dbnl/klein.css" type="text/css">]]>-->
+			</head>
+			<pagenr format="[p. $1]"/>
+		</output>
+	</style>
+	
+	<style name="medieval">
+		<output method="epub">
+			<files>
+				<file href="medieval/medieval.css"/>
+				<file href="medieval/illum_a.gif"/>
+				<file href="medieval/illum_b.gif"/>
+				<file href="medieval/illum_c.gif"/>
+				<file href="medieval/illum_d.gif"/>
+				<file href="medieval/illum_e.gif"/>
+				<file href="medieval/illum_f.gif"/>
+				<file href="medieval/illum_g.gif"/>
+				<file href="medieval/illum_h.gif"/>
+				<file href="medieval/illum_i.gif"/>
+				<file href="medieval/illum_j.gif"/>
+				<file href="medieval/illum_k.gif"/>
+				<file href="medieval/illum_l.gif"/>
+				<file href="medieval/illum_m.gif"/>
+				<file href="medieval/illum_n.gif"/>
+				<file href="medieval/illum_o.gif"/>
+				<file href="medieval/illum_p.gif"/>
+				<file href="medieval/illum_q.gif"/>
+				<file href="medieval/illum_r.gif"/>
+				<file href="medieval/illum_s.gif"/>
+				<file href="medieval/illum_t.gif"/>
+				<file href="medieval/illum_u.gif"/>
+				<file href="medieval/illum_v.gif"/>
+				<file href="medieval/illum_w.gif"/>
+				<file href="medieval/illum_x.gif"/>
+				<file href="medieval/illum_y.gif"/>
+				<file href="medieval/illum_z.gif"/>
+				<!--file href="medieval/Google Web Font MedievalSharp v3.eot"/>
+				<file href="medieval/Google Web Font MedievalSharp v3.woff"/>
+				<file href="medieval/Google Web Font MedievalSharp v3.otf"/>
+				<file href="medieval/Google Web Font MedievalSharp v3.ttf"/>
+				<file href="medieval/vineritc.otf"/>
+				<file href="medieval/MinionPro-Regular.otf"/-->
+				<file href="medieval/parchment_paper_seamless_pattern.jpg"/>
+			</files>
+			<head xmlns="http://www.w3.org/1999/xhtml">
+				<link rel="stylesheet" href="medieval/medieval.css" type="text/css"/>
+			</head>
+			<pagenr format="[$1]"/>
+		</output>
+	</style>
+	
+	<!-- #default style only applies if no other output-style is being selected, or if a specific setting is missing from that particular style -->
+	<!-- NOTE: keep #default at bottom -->
+	<style name="#default">
+		<!-- The page-break value determines after which number of items a page-break is inserted -->
+		<toc max-level="1" page-break="20"/>	<!-- overruled by toc-max-level / toc-page-break param -->
+		<index page-break="15"/>				<!-- overruled by index-page-break param -->
+		<notes page-break="5"/>					<!-- overruled by notes-page-break param -->
+		<loi page-break="20"/>					<!-- overruled by loi-page-break param -->
+		<lot page-break="20"/>					<!-- overruled by lot-page-break param -->
+		
+		<input-template href="default/input-template-nl.xml"/>
+		
+		<output method="epub">
+			<files>
+				<file href="default/default.css"/>
+			</files>
+			<head xmlns="http://www.w3.org/1999/xhtml">
+				<link rel="stylesheet" href="default/default.css" type="text/css" />
+			</head>
+		</output>
+	</style>
+	
+</styles>

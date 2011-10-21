@@ -1,0 +1,50 @@
+<eb:ebook xmlns:eb="http://grtjn.nl/ns/xproc/ebook">
+	<eb:metadata
+		xmlns:dc="http://purl.org/dc/elements/1.1/"
+		xmlns:dcterms="http://purl.org/dc/terms/"
+		xmlns:opf="http://www.idpf.org/2007/opf"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	>
+		<!-- contents: (dc:*|meta|get-metadata)* -->
+		
+		<eb:get-metadata />
+		
+		<!-- Required: -->
+		<dc:language xsi:type="dcterms:RFC3066">nl</dc:language>
+		<!-- dc:title wordt afgeleid van content -->
+		<!-- dc:identifier wordt afgeleid van naam van invoerbestand -->
+				
+		<!-- examples:
+		<dc:title>XMLHolland CodeChallenge 2011</dc:title>
+		<dc:identifier id="BookId">xmlh2011ch</dc:identifier>		<!- - Note: @id must contain 'BookId'! - ->
+		<dc:creator opf:role="aut">Charles Dickens</dc:creator>
+		<meta name="price" content="USD 19.99" />
+		-->
+		
+	</eb:metadata>
+	<eb:body>
+		<eb:front>
+			<!-- contents: (get-front-matter|index|list-of-illustrations|list-of-tables|table-of-contents)* -->
+			
+			<eb:get-front-matter />
+			<eb:table-of-contents max-level="1" label="Inhoudsopgave"/>
+			
+		</eb:front>
+		<eb:main>
+			<!-- contents: (get-main-matter|notes-page)* -->
+			
+			<eb:get-main-matter />
+			<eb:notes-page label="Voetnoten"/>
+			
+		</eb:main>
+		<eb:back>
+			<!-- contents: (get-back-matter|index|list-of-illustrations|list-of-tables|notes-page|table-of-contents)* -->
+			
+			<eb:get-back-matter />
+			<eb:index label="Index"/>
+			<eb:list-of-illustrations label="Illustraties"/>
+			<eb:list-of-tables label="Tabellen"/>
+			
+		</eb:back>
+	</eb:body>
+</eb:ebook>

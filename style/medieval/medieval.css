@@ -1,0 +1,191 @@
+
+/* CSS support is limited in e-Pub:
+ * http://www.openebook.org/2007/ops/OPS_2.0_final_spec.html#Section3.3
+ */
+
+/* Google web font MedievalSharp: http://www.google.com/webfonts/specimen/MedievalSharp (SIL Open Font License, 1.1) */
+
+@font-face {
+  font-family: 'MedievalSharp';
+  /* Webfonts don't work in Adobe DE */
+  /*
+  font-style: normal;
+  font-weight: normal;
+  src: url('http://themes.googleusercontent.com/static/fonts/medievalsharp/v3/85X_PjV6tftJ0-rX7KYQkDZQPGkEB8mad9Ln3djzM78.eot');
+  src: local('MedievalSharp'), url('http://themes.googleusercontent.com/static/fonts/medievalsharp/v3/85X_PjV6tftJ0-rX7KYQkGNcvDfl2S8kZVSqlGY-J8s.woff') format('woff');
+  */
+  /* Fail-proof approach, doesn't work in Adobe DE */
+  /*
+  src: url('Google Web Font MedievalSharp v3.eot');
+  src: local('Google Web Font MedievalSharp v3'),
+		url('Google Web Font MedievalSharp v3.woff') format('woff'),
+		url("Google Web Font MedievalSharp v3.otf") format("opentype"),
+		url("Google Web Font MedievalSharp v3.ttf") format("truetype");
+  */
+  /* Makes Adobe DE crash, otf file not good? */
+  /*src: url('Google Web Font MedievalSharp v3.otf');*/
+}
+
+/* Fonts supported on iPhone:
+ * http://daringfireball.net/2007/07/iphone_fonts
+ */
+
+* {
+	font-family: "MedievalSharp", "Marker Felt", "Zapfino", "Times New Roman", Times, serif;
+}
+
+/* Parchment background taken from:
+ * http://www.commentnation.com/background.php?MyFile=parchment_paper_seamless_pattern.php&ID=C86.php
+ *
+ * (couldn't find any licensing..)
+ */
+
+body, .body, .footer {
+	background-image: url(parchment_paper_seamless_pattern.jpg);
+	background-color: #CDAE6D;
+}
+
+/* Illuminated characters from http://retrokat.com/medieval/leil.htm, free for any use */
+
+.first-char {
+	display: block;
+	float: left;
+	font-size: 0;
+	height: 105px;
+	margin-right: 1em;
+	margin-bottom: 1em;
+	
+	background-repeat: no-repeat;
+	background-position: top left;
+}
+
+.first-char-a {
+	background-image: url(illum_a.gif);
+	width: 120px;
+}
+
+.first-char-b {
+	background-image: url(illum_b.gif);
+	width: 94px;
+}
+
+.first-char-c {
+	background-image: url(illum_c.gif);
+	width: 97px;
+}
+
+.first-char-d {
+	background-image: url(illum_d.gif);
+	width: 120px;
+}
+
+.first-char-e {
+	background-image: url(illum_e.gif);
+	width: 88px;
+}
+
+.first-char-f {
+	background-image: url(illum_f.gif);
+	width: 97px;
+}
+
+.first-char-g {
+	background-image: url(illum_g.gif);
+	width: 97px;
+}
+
+.first-char-h {
+	background-image: url(illum_h.gif);
+	width: 120px;
+}
+
+.first-char-i {
+	background-image: url(illum_i.gif);
+	width: 58px;
+}
+
+.first-char-j {
+	background-image: url(illum_j.gif);
+	width: 120px;
+}
+
+.first-char-k {
+	background-image: url(illum_k.gif);
+	width: 120px;
+}
+
+.first-char-l {
+	background-image: url(illum_l.gif);
+	width: 93px;
+}
+
+.first-char-m {
+	background-image: url(illum_m.gif);
+	width: 162px;
+}
+
+.first-char-n {
+	background-image: url(illum_n.gif);
+	width: 134px;
+}
+
+.first-char-o {
+	background-image: url(illum_o.gif);
+	width: 126px;
+}
+
+.first-char-p {
+	background-image: url(illum_p.gif);
+	width: 96px;
+}
+
+.first-char-q {
+	background-image: url(illum_q.gif);
+	width: 127px;
+	height: 120px;
+}
+
+.first-char-r {
+	background-image: url(illum_r.gif);
+	width: 109px;
+}
+
+.first-char-s {
+	background-image: url(illum_s.gif);
+	width: 74px;
+}
+
+.first-char-t {
+	background-image: url(illum_t.gif);
+	width: 106px;
+}
+
+.first-char-u {
+	background-image: url(illum_u.gif);
+	width: 122px;
+}
+
+.first-char-v {
+	background-image: url(illum_v.gif);
+	width: 145px;
+}
+
+.first-char-w {
+	background-image: url(illum_w.gif);
+	width: 194px;
+}
+
+.first-char-x {
+	background-image: url(illum_x.gif);
+	width: 130px;
+}
+
+.first-char-y {
+	background-image: url(illum_y.gif);
+	width: 120px;
+}
+
+.first-char-z {
+	background-image: url(illum_z.gif);
+	width: 125px;
+}

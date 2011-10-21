@@ -1,0 +1,127 @@
+
+* {
+	margin: 0px;
+	padding: 0px;
+	font-family: sans;
+}
+
+
+
+/*
+body, .body {
+	position: absolute;
+	top: 0;
+}
+*/
+body, .body, .footer {
+	height: 100%;
+	min-height: 100%;
+}
+
+body, .body, .footer {
+	width: 100%;
+	background-color: #DDDDDD;
+}
+
+.contentholder {
+	height: 90%;
+	min-height: 90%;
+	padding: 1em 2em 0px 2em;
+}
+
+.bodystretcher {
+	position: absolute;
+	bottom: 0;
+	height: 0px;
+	clear: both;
+}
+.footer {
+	height: 0px;
+	clear: both;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	padding-bottom: 1em;
+}
+
+ul, ol {
+	padding: 1em 1em;
+}
+
+.cover, .disclaimer {
+	padding: 2em;
+}
+
+.cover .title {
+	font-size: 3em;
+}
+.cover .author {
+	font-size: 2em;
+	padding-bottom: 2em;
+}
+.cover .title, .cover .author, .cover  .source, .cover .copyright, .cover .id {
+	width: 100%;
+	text-align: center;
+	padding-top: 2em;
+}
+
+/*
+ * Adobe Digital Editions doesn't support font-variant, nor letter-spacing.
+ * Using monospace to make spatial spans distinguishable.
+ * Using manual font sizing to mimic small-caps (together with upper-casing in the code).
+ */
+
+.spatial {
+	font-family: monospace;
+}
+
+.smallcaps {
+	font-family: monospace;
+	font-size: 125%;
+}
+.smallercaps {
+	font-size: 70%;
+}
+
+.table-of-contents, .index, .notes, .list-of-illustrations, .list-of-tables {
+	width: 100%;
+	clear: both;
+}
+/*
+table, tr, td, th { border-collapse: collapse; border: 1px solid #C0C0C0; }
+*/
+
+.toc-item, .index-item, .note-item {
+}
+.toc-item-text, .index-item-text, .note-ref, .note-item-text {
+	text-align:left;
+	vertical-align: top;
+}
+.toc-item-page, .index-item-pages, .index-item-page, .note-item-page {
+	text-align: right;
+	vertical-align: bottom;
+}
+
+.toc-level1, .toc-level1 .toc-item-page a {
+/*	font-style: normal;
+	font-weight: bold;*/
+}
+.toc-level2, .toc-level2 .toc-item-page a {
+	font-style: italic;
+	font-weight: normal;
+	padding-left: 0.5em;
+}
+.toc-level3, .toc-level3 .toc-item-page a {
+	font-style: italic;
+	font-weight: normal;
+	padding-left: 1em;
+}
+.toc-level4, .toc-level4 .toc-item-page a {
+	font-style: italic;
+	font-weight: normal;
+	padding-left: 1.5em;
+}
+
+.note-ref, .note-item-text, .note-item-page {
+	padding-bottom: 1em;
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path=""/>
+	<classpathentry exported="true" kind="lib" path="lib/calabash-0.9.35.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
