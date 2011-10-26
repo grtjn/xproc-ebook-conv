@@ -1,4 +1,3 @@
-
 XProc E-Book Processor v1.0 by @grtjn
 -------------------------------------
 
@@ -50,7 +49,7 @@ Please refer to INSTALL.txt.
 Licence
 -------
 
-This application is licensed with GPL. Please refer to NOTICE.txt and GPL.txt for further details.
+This application is licensed with GPL v2. Please refer to NOTICE.txt and docs/GPL.txt for further details.
 
 Contact
 -------
