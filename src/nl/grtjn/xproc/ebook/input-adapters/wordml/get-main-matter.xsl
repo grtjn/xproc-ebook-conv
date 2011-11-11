@@ -145,5 +145,6 @@
 			</x:img>
 		</x:figure>
 	</xsl:template>
+
 	
 </xsl:stylesheet>
