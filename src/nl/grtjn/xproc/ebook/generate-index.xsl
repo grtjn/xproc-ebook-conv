@@ -16,6 +16,7 @@
 	<xsl:param name="position" />
 	
 	<xsl:variable name="this-list" select="//eb:index[local-name(parent::*) = $part][count(preceding-sibling::eb:index) + 1 = number($position)]"/>
+	<xsl:variable name="this-list-id" select="generate-id($this-list)"/>
 	
 	<xsl:param name="output-style" select="'#default'" />
 	<xsl:param name="styles-uri"/>
@@ -27,14 +28,14 @@
 		<xsl:variable name="index-ids" as="element()*">
 			<xsl:for-each-group select="//eb:index-item" group-by="upper-case(substring(normalize-space(.), 1, 1))">
 				<xsl:sort select="upper-case(substring(normalize-space(.), 1, 1))"/>
-				<eb:ref ref-id="section-{generate-id()}">
+				<eb:ref ref-id="section-{$this-list-id}-{generate-id()}">
 					<xsl:value-of select="current-grouping-key()"/>
 				</eb:ref>
 			</xsl:for-each-group>
 		</xsl:variable>
 		
 		<eb:part type="index">
-			<eb:section id="section-{generate-id()}">
+			<eb:section id="section-{$this-list-id}">
 				<x:div class="index">
 					<x:h1><xsl:value-of select="$title"/></x:h1>
 					<x:div class="index-navigation">
@@ -45,7 +46,7 @@
 					<xsl:for-each select="$index-ids">
 						<x:h1><xsl:copy-of select="."/></x:h1>
 						<xsl:if test="((position() mod floor(number($index-page-break) div 2)) = 0) and not(position() = last())">
-							<eb:page-break id="page-{generate-id()}"/>
+							<eb:page-break id="page-{$this-list-id}-{generate-id()}"/>
 						</xsl:if>
 					</xsl:for-each>
 						
@@ -65,7 +66,7 @@
 										<xsl:sort/>
 										<xsl:apply-templates select="."/>
 										<xsl:if test="((position() mod number($index-page-break)) = 0) and not(position() = last())">
-											<eb:page-break id="page-{generate-id()}"/>
+											<eb:page-break id="page-{$this-list-id}-{generate-id()}"/>
 										</xsl:if>
 									</xsl:for-each-group>
 								</x:table>

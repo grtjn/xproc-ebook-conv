@@ -14,6 +14,7 @@
 	<xsl:param name="position" />
 	
 	<xsl:variable name="this-list" select="//eb:list-of-tables[local-name(parent::*) = $part][count(preceding-sibling::eb:list-of-tables) + 1 = number($position)]"/>
+	<xsl:variable name="this-list-id" select="generate-id($this-list)"/>
 	
 	<xsl:param name="output-style" select="'#default'" />
 	<xsl:param name="styles-uri"/>
@@ -22,13 +23,16 @@
 	<xsl:param name="lot-page-break" select="($this-list/@page-break, $styles/style[@name = ($output-style, '#default')]/lot/@page-break, 20)[1]"/>
 	
 	<xsl:template match="/">
+		<xsl:variable name="tables" select="//eb:table"/>
 		<eb:part type="list-of-tables">
-			<eb:section id="section-{generate-id()}">
+			<eb:section id="section-{$this-list-id}">
 				<x:div class="list-of-tables">
 					<x:h1><xsl:value-of select="$title"/></x:h1>
-					<x:table class="list-of-tables">
-						<xsl:apply-templates select="//eb:table" />
-					</x:table>
+					<xsl:if test="exists($tables)">
+						<x:table class="list-of-tables">
+							<xsl:apply-templates select="$tables" />
+						</x:table>
+					</xsl:if>
 				</x:div>
 			</eb:section>
 		</eb:part>
@@ -44,7 +48,7 @@
 			</x:td>
 		</x:tr>
 		<xsl:if test="((position() mod number($lot-page-break)) = 0) and not(position() = last())">
-			<eb:page-break id="page-{generate-id()}"/>
+			<eb:page-break id="page-{$this-list-id}-{generate-id()}"/>
 		</xsl:if>
 	</xsl:template>
 	
