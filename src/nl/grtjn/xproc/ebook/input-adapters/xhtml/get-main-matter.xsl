@@ -7,7 +7,9 @@
 
 	<xsl:template match="/">
 		<!-- already xhtml -->
-		<xsl:copy-of select="x:html/x:body/*"/>
+		<x:div>
+			<xsl:copy-of select="x:html/x:body/*"/>
+		</x:div>
 	</xsl:template>
 	
 </xsl:stylesheet>

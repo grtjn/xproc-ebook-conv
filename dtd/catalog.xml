@@ -5,6 +5,8 @@
 	<group prefer="system">
 		<system systemId="http://www.dbnl.org/xml/dtd/teixlite.dtd" 
 			uri="teixlite.dtd"/>
+		<system systemId="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" 
+			uri="xhtml1-transitional.dtd"/>
 	</group>
 	
 </catalog>
