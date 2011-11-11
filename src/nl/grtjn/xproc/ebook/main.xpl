@@ -230,6 +230,12 @@
 			<eb:insert-list-of-illustrations/>
 			<eb:insert-list-of-tables/>
 			<eb:insert-table-of-contents/>
+			
+			<!-- debug output -->
+			<ut:log>
+				<p:with-option name="href" select="resolve-uri('enriched-input.xml', $log-dir)"/>
+			</ut:log>
+			
 			<eb:paginate/>
 			<eb:resolve-links/>
 			<eb:store/>
@@ -404,29 +410,36 @@
 
 		<p:variable name="lib-base-uri" select="base-uri(.)"><p:inline><x/></p:inline></p:variable>
 
-		<p:viewport match="eb:front|eb:back">
-			<p:variable name="part" select="local-name(*)"/>
-			
-			<p:viewport match="eb:list-of-illustrations">
-				<p:variable name="title" select="*/@label"/>
-				
-				<ut:message>
-					<p:with-option name="message" select="concat('Inserting a list of illustrations ', $title, ' into ', $part, ' part')"/>
-				</ut:message>
+		<p:choose>
+			<p:when test="exists(//eb:image)">
+				<p:viewport match="eb:front|eb:back">
+					<p:variable name="part" select="local-name(*)"/>
+					
+					<p:viewport match="eb:list-of-illustrations">
+						<p:variable name="title" select="*/@label"/>
+						
+						<ut:message>
+							<p:with-option name="message" select="concat('Inserting a list of illustrations ', $title, ' into ', $part, ' part')"/>
+						</ut:message>
 
-				<p:sink/>
-				
-				<ut:xslt>
-					<p:input port="source">
-						<p:pipe step="current" port="source"/>
-					</p:input>
-					<p:with-option name="href" select="resolve-uri('generate-list-of-illustrations.xsl', $lib-base-uri)" />
-					<p:with-param name="title" select="$title" />
-					<p:with-param name="part" select="$part" />
-					<p:with-param name="position" select="p:iteration-position()" />
-				</ut:xslt>
-			</p:viewport>
-		</p:viewport>
+						<p:sink/>
+						
+						<ut:xslt>
+							<p:input port="source">
+								<p:pipe step="current" port="source"/>
+							</p:input>
+							<p:with-option name="href" select="resolve-uri('generate-list-of-illustrations.xsl', $lib-base-uri)" />
+							<p:with-param name="title" select="$title" />
+							<p:with-param name="part" select="$part" />
+							<p:with-param name="position" select="p:iteration-position()" />
+						</ut:xslt>
+					</p:viewport>
+				</p:viewport>
+			</p:when>
+			<p:otherwise>
+				<ut:message message="No immages.."/>
+			</p:otherwise>
+		</p:choose>
 		
 	</p:declare-step>
 	
@@ -443,10 +456,8 @@
 
 		<p:variable name="lib-base-uri" select="base-uri(.)"><p:inline><x/></p:inline></p:variable>
 		
-		<p:variable name="has-notes-page" select="exists(//eb:notes-page)"/>
-
 		<p:choose>
-			<p:when test="string($has-notes-page) eq 'true'">
+			<p:when test="exists(//eb:note) and exists(//eb:notes-page)">
 				<p:viewport match="eb:main|eb:back">
 					<p:variable name="part" select="local-name(*)"/>
 					
@@ -478,7 +489,7 @@
 				</ut:xslt>
 			</p:when>
 			<p:otherwise>
-				<ut:message message="No notes pages to insert.."/>
+				<ut:message message="No notes or notes pages.."/>
 			</p:otherwise>
 		</p:choose>
 		
@@ -497,29 +508,36 @@
 
 		<p:variable name="lib-base-uri" select="base-uri(.)"><p:inline><x/></p:inline></p:variable>
 
-		<p:viewport match="eb:front|eb:back">
-			<p:variable name="part" select="local-name(*)"/>
-			
-			<p:viewport match="eb:list-of-tables">
-				<p:variable name="title" select="*/@label"/>
-				
-				<ut:message>
-					<p:with-option name="message" select="concat('Inserting a list of tables ', $title, ' into ', $part, ' part')"/>
-				</ut:message>
-				
-				<p:sink/>
-				
-				<ut:xslt>
-					<p:input port="source">
-						<p:pipe step="current" port="source"/>
-					</p:input>
-					<p:with-option name="href" select="resolve-uri('generate-list-of-tables.xsl', $lib-base-uri)" />
-					<p:with-param name="title" select="$title" />
-					<p:with-param name="part" select="$part" />
-					<p:with-param name="position" select="p:iteration-position()" />
-				</ut:xslt>
-			</p:viewport>
-		</p:viewport>
+		<p:choose>
+			<p:when test="exists(//eb:table)">
+				<p:viewport match="eb:front|eb:back">
+					<p:variable name="part" select="local-name(*)"/>
+					
+					<p:viewport match="eb:list-of-tables">
+						<p:variable name="title" select="*/@label"/>
+						
+						<ut:message>
+							<p:with-option name="message" select="concat('Inserting a list of tables ', $title, ' into ', $part, ' part')"/>
+						</ut:message>
+						
+						<p:sink/>
+						
+						<ut:xslt>
+							<p:input port="source">
+								<p:pipe step="current" port="source"/>
+							</p:input>
+							<p:with-option name="href" select="resolve-uri('generate-list-of-tables.xsl', $lib-base-uri)" />
+							<p:with-param name="title" select="$title" />
+							<p:with-param name="part" select="$part" />
+							<p:with-param name="position" select="p:iteration-position()" />
+						</ut:xslt>
+					</p:viewport>
+				</p:viewport>
+			</p:when>
+			<p:otherwise>
+				<ut:message message="No tables.."/>
+			</p:otherwise>
+		</p:choose>
 		
 	</p:declare-step>
 	
