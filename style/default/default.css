@@ -13,8 +13,12 @@ body, .body, .footer {
 	padding: 1em;
 }
 
-p.indent {
+.indent {
 	text-indent: 1em;
+}
+
+.space-before {
+	margin-top: 1em;
 }
 
 th {
@@ -33,3 +37,7 @@ i {
     vertical-align: super;
 	padding-right: 0.3em;
 } 
+
+li {
+	margin-left: 1.5em;
+}

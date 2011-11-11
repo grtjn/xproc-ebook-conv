@@ -58,7 +58,7 @@
 			<ut:message message="Adding mimetype to epub"/>
 					
 			<p:store method="text">
-				<p:with-option name="href" select="resolve-uri('mimetype', $temp-dir)"/>
+				<p:with-option name="href" select="resolve-uri('epub/mimetype', $temp-dir)"/>
 				<p:input port="source">
 					<p:inline><c:text>application/epub+zip</c:text></p:inline>
 				</p:input>
@@ -86,7 +86,7 @@
 			<ut:message message="Adding META-INF/container.xml to epub"/>
 					
 			<p:store indent="true">
-				<p:with-option name="href" select="resolve-uri('META-INF/container.xml', $temp-dir)"/>
+				<p:with-option name="href" select="resolve-uri('epub/META-INF/container.xml', $temp-dir)"/>
 				<p:input port="source">
 					<p:inline>
 						<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
@@ -125,7 +125,7 @@
 			</ut:xslt>
 			
 			<p:store indent="true">
-				<p:with-option name="href" select="resolve-uri('OPS/manifest.opf', $temp-dir)"/>
+				<p:with-option name="href" select="resolve-uri('epub/OPS/manifest.opf', $temp-dir)"/>
 			</p:store>
 		</p:group>
 	</p:declare-step>
@@ -154,7 +154,7 @@
 			</ut:xslt>
 			
 			<p:store indent="true">
-				<p:with-option name="href" select="resolve-uri('OPS/toc.ncx', $temp-dir)"/>
+				<p:with-option name="href" select="resolve-uri('epub/OPS/toc.ncx', $temp-dir)"/>
 			</p:store>
 		</p:group>
 	</p:declare-step>
@@ -196,7 +196,7 @@
 			
 					<p:store>
 						<p:with-option name="indent" select="$debug"/>
-						<p:with-option name="href" select="resolve-uri(concat('OPS/', $id, '.xhtml'), $temp-dir)"/>
+						<p:with-option name="href" select="resolve-uri(concat('epub/OPS/', $id, '.xhtml'), $temp-dir)"/>
 					</p:store>
 					
 					<ut:empty/>
@@ -263,7 +263,7 @@
 
 						<cxf:copy fail-on-error="false">
 							<p:with-option name="href" select="$href" />
-							<p:with-option name="target" select="resolve-uri(concat('OPS/', $src), $temp-dir)" />
+							<p:with-option name="target" select="resolve-uri(concat('epub/OPS/', $src), $temp-dir)" />
 						</cxf:copy>
 						
 						<ut:empty/>
@@ -340,7 +340,7 @@
 							<p:when test="contains($src, '/')">
 								<p:sink/>
 								<cxf:mkdir> 
-									<p:with-option name="href" select="resolve-uri(concat('OPS/', $dir), $temp-dir)" />
+									<p:with-option name="href" select="resolve-uri(concat('epub/OPS/', $dir), $temp-dir)" />
 								</cxf:mkdir>
 								<ut:empty/>
 							</p:when>
@@ -350,7 +350,7 @@
 						</p:choose>
 						<cxf:copy fail-on-error="false">
 							<p:with-option name="href" select="$href" />
-							<p:with-option name="target" select="resolve-uri(concat('OPS/', $src), $temp-dir)" />
+							<p:with-option name="target" select="resolve-uri(concat('epub/OPS/', $src), $temp-dir)" />
 						</cxf:copy>
 						<ut:empty/>
 					</p:group>
@@ -412,7 +412,7 @@
 						</c:files>
 					</p:inline>
 				</p:input>
-				<p:with-option name="attribute-value" select="$temp-dir"/>
+				<p:with-option name="attribute-value" select="resolve-uri('epub/', $temp-dir)"/>
 			</p:add-attribute>
 			
 			<ut:log>
