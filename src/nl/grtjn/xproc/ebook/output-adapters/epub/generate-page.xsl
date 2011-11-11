@@ -50,6 +50,12 @@
 		</xsl:element>
 	</xsl:template>
 
+	<xsl:template match="x:body" mode="#all">
+		<x:div>
+			<xsl:apply-templates select="@*|node()" mode="#current"/>
+		</x:div>
+	</xsl:template>
+
 	<xsl:template match="x:p" priority="2">
 		<xsl:variable name="p" select="."/>
 		
