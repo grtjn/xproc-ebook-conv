@@ -14,6 +14,7 @@
 	<xsl:param name="position" />
 
 	<xsl:variable name="this-list" select="//eb:table-of-contents[local-name(parent::*) = $part][count(preceding-sibling::eb:table-of-contents) + 1 = number($position)]"/>
+	<xsl:variable name="this-list-id" select="generate-id($this-list)"/>
 	
 	<xsl:param name="output-style" select="'#default'" />
 	<xsl:param name="styles-uri"/>
@@ -24,7 +25,7 @@
 	
 	<xsl:template match="/">
 		<eb:part type="table-of-contents">
-			<eb:section id="section-{generate-id($this-list)}">
+			<eb:section id="section-{$this-list-id}">
 				<x:div class="toc">
 					<x:h1><xsl:value-of select="$title"/></x:h1>
 					<x:table class="table-of-contents">
@@ -56,7 +57,7 @@
 				</x:tr>
 			</xsl:if>
 			<xsl:if test="(($position mod number($toc-page-break)) = 0) and $not-last">
-				<eb:page-break id="page-{generate-id()}"/>
+				<eb:page-break id="page-{$this-list-id}-{generate-id()}"/>
 			</xsl:if>
 			<xsl:apply-templates select="*" />
 		</xsl:if>
@@ -72,11 +73,11 @@
 					<xsl:value-of select="normalize-space(@label)"/>
 				</x:td>
 				<x:td class="toc-item-page">
-					<eb:page-ref ref-id="section-{generate-id($this-list)}" />
+					<eb:page-ref ref-id="section-{$this-list-id}" />
 				</x:td>
 			</x:tr>
 			<xsl:if test="(($position mod number($toc-page-break)) = 0) and $not-last">
-				<eb:page-break id="page-{generate-id()}"/>
+				<eb:page-break id="page-{$this-list-id}-{generate-id()}"/>
 			</xsl:if>
 		</xsl:if>
 	</xsl:template>

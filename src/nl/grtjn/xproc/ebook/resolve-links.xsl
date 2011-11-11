@@ -56,7 +56,7 @@
 	</xsl:template>
 
 	<xsl:template match="eb:page-ref">
-		<xsl:variable name="ref-page" select="key('id', @ref-id, $root)/(child::eb:page[1], ancestor::eb:page[1])[1]"/>
+		<xsl:variable name="ref-page" select="(key('id', @ref-id, $root)/(child::eb:page[1], ancestor::eb:page[1]))[1]"/>
 		
 		<xsl:variable name="page-id" select="string($ref-page/@id)" />
 		<xsl:variable name="page-nr" select="string($ref-page/@n)" />
@@ -68,7 +68,7 @@
 	</xsl:template>
 
 	<xsl:template match="eb:note-ref">
-		<xsl:variable name="ref-page" select="key('id', @ref-id, $root)/(child::eb:page[1], ancestor::eb:page[1])[1]"/>
+		<xsl:variable name="ref-page" select="(key('id', @ref-id, $root)/(child::eb:page[1], ancestor::eb:page[1]))[1]"/>
 		
 		<xsl:variable name="page-id" select="string($ref-page/@id)" />
 		
@@ -81,7 +81,7 @@
 	</xsl:template>
 
 	<xsl:template match="eb:ref">
-		<xsl:variable name="ref-page" select="key('id', @ref-id, $root)/(child::eb:page[1], ancestor::eb:page[1])[1]"/>
+		<xsl:variable name="ref-page" select="(key('id', @ref-id, $root)/(child::eb:page[1], ancestor::eb:page[1]))[1]"/>
 		
 		<xsl:variable name="page-id" select="string($ref-page/@id)" />
 		
