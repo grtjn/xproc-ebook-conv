@@ -1,0 +1,34 @@
+
+Following issues can be found at http://github.com/grtjn/xproc-ebook-conv/issues
+
+Won't Fix
+---------
+
+Issues inherent to design, or wishes beyond scope of this project:
+#5 - Debug indentation disturbs epub layout [output]
+
+Future
+------
+
+To be fixed at some point in the future, hopefully:
+#10 - Showing footnotes at end-of-page or as sidebar [output]
+#9 - Support for more granular input [input]
+#8 - Support for PDF output [output]
+#7 - Improve support for showing footnotes 'inline' [output]
+#6 - Improve error handling of missing files [input]
+
+Version 1.1
+-----------
+
+Fixed in this release:
+#13 - Extra demo material [docs]
+#12 - New wikipedia input adapter [input]
+#11 - Improved wordml input adapter [input]
+#4 - Add release docs [docs] (e.g. this document)
+#3 - duplicate ids when multiple toc, lof, lot, index [output]
+#2 - html input-adapter only accepts xhtml [input]
+#1 - Bit more clear license statement [docs]
+
+Version 1.0
+-----------
+Initial version.
