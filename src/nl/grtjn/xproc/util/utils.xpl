@@ -346,6 +346,9 @@
 		<!-- clean up parameters port input to stop p:variable from complaining -->
 		<ut:parameters name="params"/>
 		
+		<!-- cx:message doesn't take a sequence.. -->
+		<p:wrap-sequence wrapper="x"/>
+		
 		<p:group>
 			<p:variable name="verbose" select="(//c:param[@name='verbose']/@value, false())[1]"><p:pipe step="params" port="parameters"/></p:variable>
 			
