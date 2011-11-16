@@ -73,7 +73,7 @@
 	| Globals
 	+-->
 	
-	<p:variable name="version" select="'1.0'"/>
+	<p:variable name="version" select="'1.1'"/>
 	<p:variable name="app-name" select="concat('XProc E-Book Processor v', $version, ' by @grtjn')"/>
 	
 	<p:variable name="lib-base-uri" select="base-uri(.)"><p:inline><x/></p:inline></p:variable>
