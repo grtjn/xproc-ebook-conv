@@ -49,12 +49,16 @@
 				<xsl:for-each select="//eb:page">
 					<item id="{@id}" href="{@id}.xhtml" media-type="application/xhtml+xml"/>
 				</xsl:for-each>
-				<xsl:for-each select="//eb:image">
+				
+				<!-- write each image only once -->
+				<xsl:for-each-group select="//eb:image" group-by="@src">
 					<xsl:variable name="extension" select="replace(@src, '^(.*[\.])?([^\.]+)', '$2')"/>
 					<item id="{@id}" href="{@src}" media-type="{local:get-mimetype(@src)}"/>
-				</xsl:for-each>
+				</xsl:for-each-group>
+				
 				<!--item id="stylesheet" href="css/epub.css" media-type="text/css"/>
 				<item id="myfont" href="css/myfont.otf" media-type="application/x-font-opentype"/-->
+				
 				<xsl:for-each select="$files/file">
 					<item id="{generate-id()}" href="{@href}" media-type="{local:get-mimetype(@href)}"/>
 				</xsl:for-each>

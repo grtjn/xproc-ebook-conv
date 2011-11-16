@@ -90,6 +90,12 @@
 		</div>
 	</xsl:template>
 
+	<xsl:template match="x:a//x:figure|x:span//x:figure" priority="2">
+		<span xmlns="http://www.w3.org/1999/xhtml" class="figure">
+			<xsl:apply-templates select="node()" />
+		</span>
+	</xsl:template>
+
 	<xsl:template match="x:a/@name" mode="#all" priority="2">
 		<xsl:attribute name="id">
 			<xsl:value-of select="." />

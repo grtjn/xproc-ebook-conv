@@ -73,4 +73,10 @@
 		</eb:note>
 	</xsl:template>
 	
+	<xsl:template match="x:a[starts-with(@href, '#')]">
+		<eb:ref ref-id="{substring-after(@href, '#')}">
+			<xsl:apply-templates select="@*|node()" />
+		</eb:ref>
+	</xsl:template>
+	
 </xsl:stylesheet>

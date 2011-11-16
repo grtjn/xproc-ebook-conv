@@ -236,50 +236,54 @@
 
 			<!-- loop over images to copy them -->
 			
-			<p:viewport match="eb:image">
-				<p:variable name="src" select="*/@src" />
-				<p:variable name="dir" select="replace($src, '^(.*/)?([^/]+)$', '$1')" />
-				<p:variable name="base-uri" select="base-uri(*)"/>
-				<p:variable name="href" select="resolve-uri($src, $base-uri)" />
+			<p:viewport match="*[eb:image]">
+				<p:variable name="parent-base-uri" select="base-uri(*)"/>
 				
-				<ut:message>
-					<p:with-option name="message" select="concat('Adding OPS/', $src, ' to epub')" />
-				</ut:message>
-				
-				<p:try name="try">
-					<p:group>
-						<p:choose>
-							<p:when test="contains($src, '/')">
-								<p:sink/>
-								<cxf:mkdir> 
-									<p:with-option name="href" select="$dir" />
-								</cxf:mkdir>
-								<ut:empty/>
-							</p:when>
-							<p:otherwise>
-								<p:identity/>
-							</p:otherwise>
-						</p:choose>
+				<p:viewport match="eb:image">
+					<p:variable name="src" select="*/@src" />
+					<p:variable name="dir" select="replace($src, '^(.*/)?([^/]+)$', '$1')" />
+					<p:variable name="base-uri" select="base-uri(*)"/>
+					<p:variable name="href" select="if (starts-with($base-uri, 'http://')) then resolve-uri($src, $parent-base-uri) else resolve-uri($src, $base-uri)" />
+					
+					<ut:message>
+						<p:with-option name="message" select="concat('Adding OPS/', $src, ' to epub')" />
+					</ut:message>
+					
+					<p:try name="try">
+						<p:group>
+							<p:choose>
+								<p:when test="contains($src, '/')">
+									<p:sink/>
+									<cxf:mkdir> 
+										<p:with-option name="href" select="$dir" />
+									</cxf:mkdir>
+									<ut:empty/>
+								</p:when>
+								<p:otherwise>
+									<p:identity/>
+								</p:otherwise>
+							</p:choose>
 
-						<cxf:copy fail-on-error="false">
-							<p:with-option name="href" select="$href" />
-							<p:with-option name="target" select="resolve-uri(concat('epub/OPS/', $src), $temp-dir)" />
-						</cxf:copy>
-						
-						<ut:empty/>
-					</p:group>
-					<p:catch name="catch">
-						<ut:log>
-							<p:with-option name="href" select="resolve-uri('catch.xml', $log-dir)"/>
-							<p:input port="source">
-								<p:pipe step="catch" port="error"/>
-							</p:input>
-						</ut:log>
-						
-						<ut:message message="..copying image failed!!"/>
-					</p:catch>
-				</p:try>
-				
+							<cxf:copy fail-on-error="false">
+								<p:with-option name="href" select="$href" />
+								<p:with-option name="target" select="resolve-uri(concat('epub/OPS/', $src), $temp-dir)" />
+							</cxf:copy>
+							
+							<ut:empty/>
+						</p:group>
+						<p:catch name="catch">
+							<ut:log>
+								<p:with-option name="href" select="resolve-uri('catch.xml', $log-dir)"/>
+								<p:input port="source">
+									<p:pipe step="catch" port="error"/>
+								</p:input>
+							</ut:log>
+							
+							<ut:message message="..copying image failed!!"/>
+						</p:catch>
+					</p:try>
+					
+				</p:viewport>
 			</p:viewport>
 		</p:group>
 		
