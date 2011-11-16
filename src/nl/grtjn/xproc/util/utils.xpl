@@ -300,6 +300,8 @@
 		<p:option name="method" select="'xml'"/>
 		<p:option name="indent" select="'true'"/>
 		
+		<p:wrap-sequence wrapper="sequence"/>
+		
 		<!-- clean up parameters port input to stop p:variable from complaining -->
 		<ut:parameters name="params"/>
 		
@@ -308,8 +310,6 @@
 			
 			<p:choose>
 				<p:when test="string($debug) eq 'true'">
-					<p:wrap-sequence wrapper="sequence"/>
-		
 					<ut:message>
 						<p:with-option name="message" select="concat('Logging to ', $href)" />
 					</ut:message>
@@ -544,7 +544,9 @@
 		<p:input port="source" sequence="true" primary="true"/>
 		<p:input port="parameters" kind="parameter"/>
 		<p:output port="result" primary="true"/>
-		<p:output port="secondary" sequence="true"/>
+		<p:output port="secondary" sequence="true">
+			<p:pipe step="xslt" port="secondary"/>
+		</p:output>
 		
 		<p:option name="href" required="true"/>
 		
@@ -552,7 +554,7 @@
 			<p:with-option name="href" select="$href"/>
 		</p:load>
 		
-		<p:xslt>
+		<p:xslt name="xslt">
 			<p:input port="stylesheet">
 				<p:pipe port="result" step="load-file"/>
 			</p:input>
