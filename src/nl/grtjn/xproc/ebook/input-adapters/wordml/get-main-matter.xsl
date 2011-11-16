@@ -17,6 +17,8 @@
 	exclude-result-prefixes="#all">
 	
 	<xsl:key use="w:name/@w:val, wx:uiName/@wx:val, @w:styleId" match="w:style" name="styles"/>
+	
+	<xsl:variable name="quot">"</xsl:variable>
 
 	<xsl:template match="@*|comment()|processing-instruction()"/>
 
@@ -113,6 +115,20 @@
 		
 	<xsl:template match="w:r">
 		<xsl:choose>
+		<xsl:when test="exists(w:fldChar)"/>
+		<xsl:when test="preceding-sibling::*[1][self::w:r][w:fldChar[@w:fldCharType = 'begin']] and following-sibling::*[1][self::w:r][w:fldChar[@w:fldCharType = 'separate']]">
+			<xsl:choose>
+			<xsl:when test="contains(., ' HYPERLINK ')">
+				<x:a href="{substring-before(substring-after(., $quot), $quot)}">
+					<xsl:apply-templates select="ancestor::w:r/following-sibling::w:r[2]"/>
+				</x:a>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:apply-templates />
+			</xsl:otherwise>
+			</xsl:choose>
+		</xsl:when>
+		<xsl:when test="preceding-sibling::*[1][self::w:r][w:fldChar[@w:fldCharType = 'separate']] and following-sibling::*[1][self::w:r][w:fldChar[@w:fldCharType = 'end']]"/>
 		<xsl:when test="exists(w:rPr/w:color | w:rPr/w:b | w:rPr/w:i)">
 			<x:span>
 				<xsl:attribute name="style">
@@ -135,15 +151,27 @@
 		</x:a>
 	</xsl:template>
 	
+	<xsl:template match="w:instrText"/>
+	
 	<xsl:template match="w:pict">
 		<x:figure>
 			<x:img src="{substring-after(v:shape/v:imagedata/@src, 'wordml://')}" alt="{v:shape/@alt}">
-			<!--width="{replace(v:shape/@style, '^.*width:([^;]+).*$', '$1')}" height="{replace(v:shape/@style, '^.*height:([^;]+).*$', '$1')}"/-->
-			<xsl:if test="contains(v:shape/@style, 'position:absolute;left:0;text-align:left;')">
-				<xsl:attribute name="style">float:left;</xsl:attribute>
-			</xsl:if>
+				<!--width="{replace(v:shape/@style, '^.*width:([^;]+).*$', '$1')}" height="{replace(v:shape/@style, '^.*height:([^;]+).*$', '$1')}"/-->
+				<xsl:if test="contains(v:shape/@style, 'position:absolute;left:0;text-align:left;')">
+					<xsl:attribute name="style">float:left;</xsl:attribute>
+				</xsl:if>
 			</x:img>
 		</x:figure>
+		
+		<xsl:for-each select="w:binData">
+			<xsl:result-document href="{resolve-uri(substring-after(@w:name, 'wordml://'), base-uri(/))}">
+				<xsl:copy>
+					<xsl:copy-of select="@*"/>
+					<xsl:attribute name="encoding" select="'base64'"/>
+					<xsl:copy-of select="node()"/>
+				</xsl:copy>
+			</xsl:result-document>
+		</xsl:for-each>
 	</xsl:template>
 
 	

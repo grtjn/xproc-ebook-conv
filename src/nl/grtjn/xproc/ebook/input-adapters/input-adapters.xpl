@@ -2,12 +2,15 @@
 <p:library version="1.0"
 	xmlns:p="http://www.w3.org/ns/xproc"
 	xmlns:c="http://www.w3.org/ns/xproc-step"
+	xmlns:cx="http://xmlcalabash.com/ns/extensions"
+	xmlns:cxf="http://xmlcalabash.com/ns/extensions/fileutils"
 	xmlns:ut="http://grtjn.nl/ns/xproc/util"
 
 	xmlns:eb="http://grtjn.nl/ns/xproc/ebook"
 	xmlns:in="http://grtjn.nl/ns/xproc/ebook/input-adapters"
 	xmlns:dc="http://purl.org/dc/elements/1.1/"
 	xmlns:opf="http://www.idpf.org/2007/opf"
+	xmlns:x="http://www.w3.org/1999/xhtml" 
 	
 	exclude-inline-prefixes="#all">
 
@@ -59,10 +62,36 @@
 							
 							<!-- apply xsl input-adapter on current part -->
 							<p:viewport match="eb:part/*">
-								<ut:xslt>
+								<ut:xslt name="xslt">
 									<p:with-option name="href" select="resolve-uri(concat($type, '/', $action, '.xsl'), $lib-base-uri)"/>
 								</ut:xslt>
+
+								<!-- debug logging -->
+								<ut:log>
+									<p:with-option name="href" select="resolve-uri(concat($type, '-', $action, '.xml'), $log-dir)"/>
+								</ut:log>
+								<ut:log>
+									<p:input port="source">
+										<p:pipe step="xslt" port="secondary"/>
+									</p:input>
+									<p:with-option name="href" select="resolve-uri(concat($type, '-', $action, '-extra.xml'), $log-dir)"/>
+								</ut:log>
+								<p:sink/>
+								<p:identity>
+									<p:input port="source">
+										<p:pipe step="xslt" port="result"/>
+									</p:input>
+								</p:identity>
+								<!-- /debug logging -->
+								
+								<in:store-extra-files>
+									<p:input port="secondary">
+										<p:pipe step="xslt" port="secondary"/>
+									</p:input>
+								</in:store-extra-files>
 							</p:viewport>
+							
+							<in:download-images />
 							
 							<p:delete match="eb:part/*[empty(*)]" />
 							<p:delete match="eb:part[empty(*)]" />
@@ -109,6 +138,123 @@
 					<p:pipe step="default-metadata" port="result"/>
 				</p:input>
 			</p:insert>
+		</p:group>
+		
+	</p:declare-step>
+
+<!--+========================================================+
+	| Step store-extra-files
+	+-->
+	
+	<p:declare-step type="in:store-extra-files" name="current">
+		<p:input port="source" primary="true"/>
+		<p:input port="secondary" sequence="true"/>
+		<p:input port="parameters" kind="parameter"/>
+		<p:output port="result">
+			<p:pipe step="current" port="source"/>
+		</p:output>
+		
+		<ut:parameters name="params"/>
+		
+		<p:sink/>
+		
+		<p:group>
+			<p:variable name="input-dir" select="//c:param[@name = 'input-dir']/@value"><p:pipe step="params" port="parameters"/></p:variable>
+
+			<p:for-each name="for-each">
+				<p:iteration-source select="/"><p:pipe step="current" port="secondary"/></p:iteration-source>
+				
+				<p:variable name="outpath" select="base-uri(/*)"/>
+				
+				<ut:message>
+					<p:with-option name="message" select="concat('Storing extra file to ', $outpath, '..')" />
+				</ut:message>
+				
+				<p:rename match="/*[@encoding = 'base64']" new-name="c:data"/>
+				
+				<!-- only c:data is actually decoded, other contents is passed through untouched, despite the cx:decode=true -->
+				<p:store cx:decode="true">
+					<p:with-option name="href" select="$outpath" />
+				</p:store>
+			</p:for-each>
+		</p:group>
+		
+	</p:declare-step>
+
+<!--+========================================================+
+	| Step download-images
+	+-->
+	
+	<p:declare-step type="in:download-images" name="current">
+		<p:input port="source"/>
+		<p:input port="parameters" kind="parameter"/>
+		<p:output port="result"/>
+		
+		<ut:parameters name="params"/>
+		
+		<p:group>
+			<p:variable name="input-dir" select="//c:param[@name = 'input-dir']/@value"><p:pipe step="params" port="parameters"/></p:variable>
+
+			<p:viewport match="x:img[starts-with(@src, 'http://')]" name="viewport">
+				<p:variable name="src" select="/*/@src"/>
+				<p:variable name="outfile" select="translate($src, ':/', '__')"/>
+				
+				<cxf:info name="file-info">
+					<p:with-option name="href" select="resolve-uri($outfile, $input-dir)" />
+				</cxf:info>
+				
+				<p:wrap-sequence wrapper="c:file-info" />
+				
+				<p:group>
+					<p:variable name="file-exists" select="exists(/*/*)"/>
+					
+					<ut:empty/>
+					
+					<p:choose>
+						<p:when test="string($file-exists) = 'false'">
+							<ut:message>
+								<p:with-option name="message" select="concat('Downloading image from ', $src, ' to ', resolve-uri($outfile, $input-dir), '..')" />
+							</ut:message>
+							
+							<p:template>
+								<p:input port="template">
+									<p:inline>
+										<c:request method="GET" href="{$src}" />
+									</p:inline>
+								</p:input>
+								<p:with-param name="src" select="$src"/>
+							</p:template>
+
+							<p:http-request/>
+							
+							<p:store cx:decode="true">
+								<p:with-option name="href" select="resolve-uri($outfile, $input-dir)" />
+							</p:store>
+							
+							<p:identity>
+								<p:input port="source">
+									<p:pipe step="viewport" port="current"/>
+								</p:input>
+							</p:identity>
+						</p:when>
+						<p:otherwise>
+							<ut:message>
+								<p:with-option name="message" select="concat('Skipping image from ', $src, '..')" />
+							</ut:message>
+							
+							<p:identity>
+								<p:input port="source">
+									<p:pipe step="viewport" port="current"/>
+								</p:input>
+							</p:identity>
+						</p:otherwise>
+					</p:choose>
+					
+					<p:add-attribute match="*" attribute-name="src">
+						<p:with-option name="attribute-value" select="$outfile"/>
+					</p:add-attribute>
+				</p:group>
+			</p:viewport>
 		</p:group>
 		
 	</p:declare-step>
