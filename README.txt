@@ -53,4 +53,4 @@ This application is licensed with GPL v2. Please refer to NOTICE.txt and docs/GP
 
 Contact
 -------
-XProc E-Book Processor is maintained by Geert Josten, <geert.josten@gmail.com>.
+XProc E-Book Processor is maintained by Geert Josten, <geert.josten -at- gmail>.
