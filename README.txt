@@ -5,6 +5,8 @@ This application converts XML files to electronic publication files. It is desig
 
 The application has been written entirely for the Code Challenge by XML Holland (http://www.xmlholland.nl/node/770), but has conceptually grown far beyond the requirements of the contest. The goal of the contest was just to create an ePub out of a given TEI document, but this application has been designed to do so in a highly configurable way, and to accept multiple input formats, and in future allow creation of output formats other than ePub.
 
+As winning solution, this application was allowed to be presented at XML Amsterdam 2011 (http://www.xmlamsterdam.com/). The presentation is available online here: http://prezi.com/oykrbwjuwlbc/xproc-e-book-processor-by-grtjn/. It gives a brief introduction on XProc, the challenge, and the architecture of the application.
+
 Feature list
 ------------
 
